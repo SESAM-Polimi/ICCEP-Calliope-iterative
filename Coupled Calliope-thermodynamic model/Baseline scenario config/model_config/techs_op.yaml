@@ -1,0 +1,203 @@
+##
+# TECHNOLOGY DEFINITIONS
+##
+
+# Note: '-start' and '-end' is used in tutorial documentation only
+
+techs:
+
+    ##
+    # Conversion+
+    ##
+    hp_dhw:
+        essentials:
+            name: 'HP DHW'
+            color: '#E33B78'
+            parent: conversion_plus
+            primary_carrier_out: dhw
+            primary_carrier_in: electricity
+            carrier_out: dhw
+            carrier_in: electricity
+            #carrier_in_2: ring_heat
+        constraints:
+            energy_eff: file=cop_dhw.csv  # @ 50C output
+            lifetime: 30
+        costs.monetary:
+            interest_rate: 0.10
+            energy_cap: 300 #€/kW  
+            om_prod: 0.04 
+            
+    
+    hp_clim_hot:
+        essentials:
+            name: 'HP_Hot'
+            color: '#E84C4C'
+            parent: conversion_plus
+            primary_carrier_out: sh
+            primary_carrier_in: electricity
+            carrier_out: sh
+            carrier_in: electricity
+            #carrier_in_2: ring_heat
+        constraints:
+            energy_eff: file=cop_sh.csv  # @ 40C output
+            lifetime: 30
+        costs.monetary:
+            interest_rate: 0.10
+            energy_cap: 300 #€/kW 
+            om_prod: 0.04 
+            
+    hp_clim_cold:
+        essentials:
+            name: 'HP_Cold'
+            color: '#5FA5CF'
+            parent: conversion_plus
+            primary_carrier_out: air_cond
+            primary_carrier_in: electricity
+            carrier_out: air_cond
+            #carrier_out_2: ring_heat
+            carrier_in: electricity
+        constraints:
+            energy_eff: file=cop_co.csv  # @ ?C output
+            lifetime: 30
+        costs.monetary:
+            interest_rate: 0.10
+            energy_cap: 300 #€/kW     
+            om_prod: 0.04 
+         
+    ##
+    # Supply
+    ##
+    
+    # electricity grid
+    grid:
+        essentials:
+            name: 'Electricity grid'
+            color: '#9CBC90'
+            parent: supply
+            carrier_out: electricity
+        constraints:
+            resource: inf 
+            force_resource: False
+            energy_cap_equals: 100000
+            lifetime: 60
+        costs:
+            monetary:
+                interest_rate: 0.10
+                om_prod: 0.3  # €/kWh
+
+    # pv rooftop
+    pv_rooftop:
+        essentials:
+            name: 'Photovoltaic power distributed'
+            color: '#F3F149'
+            parent: supply_plus
+            carrier_out: electricity
+        constraints:
+            resource: file=solar_resource.csv 
+            force_resource: True
+            #resource_area_max: 1120 #70*16
+            #resource_area_per_energy_cap: 1.0
+            resource_unit: energy_per_cap
+            energy_cap_equals: 1440 #70*16
+            lifetime: 30
+        costs:
+            monetary:
+                interest_rate: 0.10
+                energy_cap: 2200  # €/kW
+                om_prod: 0.0411  # €/kWh
+                om_annual: 43 # €/kW/year
+        
+    ##
+    # Storage
+    ##
+    
+    # TES DHW
+    tes_dhw:
+        essentials:
+            name: 'Thermal storage DHW'
+            color: '#F0A0BD'
+            parent: storage
+            carrier: dhw
+        constraints:
+            energy_eff: 1  # 
+            storage_loss: 0.001  # Small loss over time assumed
+            #storage_time_max: 96
+            lifetime: 40
+            storage_initial: 0 #30% of max capacity
+        costs:
+            monetary:
+                interest_rate: 0.10
+                energy_cap: 50  # €/kW
+                om_prod: 0.01
+                
+    # TES SH
+    tes_sh:
+        essentials:
+            name: 'Thermal storage SH'
+            color: '#EC8989'
+            parent: storage
+            carrier: sh
+        constraints:
+            energy_eff: 1  # 
+            storage_loss: 0.001  # Small loss over time assumed
+            #storage_time_max: 96
+            lifetime: 40
+            storage_initial: 0 #30% of max capacity
+        costs:
+            monetary:
+                interest_rate: 0.10
+                energy_cap: 50  # €/kW
+                om_prod: 0.01 
+                                
+    # TES CO
+    tes_co:
+        essentials:
+            name: 'Thermal storage CO'
+            color: '#8EBEDB'
+            parent: storage
+            carrier: air_cond
+        constraints:
+            energy_eff: 1  # 
+            storage_loss: 0.001  # No loss over time assumed
+            #storage_time_max: 96
+            lifetime: 40
+            storage_initial: 0 #30% of max capacity
+        costs:
+            monetary:
+                interest_rate: 0.10
+                energy_cap: 50  # €/kW
+                om_prod: 0.01 
+                
+    ##
+    # Demand
+    ##
+    # demand-start
+    demand_el:
+        essentials:
+            name: 'Electricity demand'
+            color: '#07F577'
+            parent: demand
+            carrier: electricity
+            
+    demand_dhw:
+        essentials:
+            name: 'DHW demand'
+            color: '#F507D8'
+            parent: demand
+            carrier: dhw
+            
+    demand_sh:
+        essentials:
+            name: 'SH demand'
+            color: '#F50719'
+            parent: demand
+            carrier: sh
+            
+    demand_co:
+        essentials:
+            name: 'CO demand'
+            color: '#425AD3'
+            parent: demand
+            carrier: air_cond
+    # demand-end
+

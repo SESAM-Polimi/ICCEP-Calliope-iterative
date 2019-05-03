@@ -1,0 +1,17 @@
+##
+# Overrides for different example model configuratiions
+##
+
+iteration_zero:
+    model.name: Iteration 0
+    techs.hp_dhw.energy_eff: file=cop_dhw_start.csv 
+    techs.hp_clim_hot.energy_eff: file=cop_sh_start.csv 
+    techs.hp_clim_cold.energy_eff: file=cop_co_start.csv 
+
+
+different_storage:
+    model.name: alt_storage_size
+    locations.buildings.techs:
+        tes_dhw.constraints.storage_cap_equals: 1674
+        tes_sh.constraints.storage_cap_equals: 5581
+        tes_co.constraints.storage_cap_equals: 2791

@@ -1,0 +1,96 @@
+##
+# LOCATIONS
+##
+
+locations:
+    # domestic-start
+    buildings:
+        techs:
+            grid:
+            pv_rooftop:
+            hp_dhw:
+                constraints:
+                    energy_cap_equals: 800 
+            hp_clim_hot:
+                constraints:
+                    energy_cap_equals: 3200  
+            hp_clim_cold:
+                constraints:
+                    energy_cap_equals: 3200  
+            tes_dhw:
+                constraints:
+                    energy_cap_equals:  800 #50*16
+                    storage_cap_equals: 2791
+                    # storage_cap_min: 1395
+                    # storage_cap_max: 2791
+            tes_sh:
+                constraints:
+                    energy_cap_equals:  3200 
+                    storage_cap_equals: 11163
+                    # storage_cap_min: 8372
+                    # storage_cap_max: 11163
+            tes_co:
+                constraints:
+                    energy_cap_equals:  3200
+                    storage_cap_equals: 5581
+                    # storage_cap_min: 4186
+                    # storage_cap_max: 5581
+            # demand_el:
+                # constraints:
+                    # resource: file=demand_el.csv
+                    # resource_scale: 100
+            demand_dhw:
+                constraints:
+                    resource: file=demand_dhw.csv
+                    resource_scale: 16
+            demand_sh:
+                constraints:
+                    resource: file=demand_sh.csv
+                    resource_scale: 16
+            demand_co:
+                constraints:
+                    resource: file=demand_co.csv
+                    resource_scale: 16
+                # #coordinates: {x: 2, y: 2}    
+    # domestic-end
+    
+    #commercial-start
+    commercial:
+        techs:
+            grid:
+            pv_rooftop:
+                constraints:
+                    energy_cap_equals: 540 #kWp
+            hp_clim_hot:
+                constraints:
+                    energy_cap_equals: 1200 #400*3
+            hp_clim_cold:
+                constraints:
+                    energy_cap_equals: 1200 #400*3
+            tes_sh:
+                constraints:
+                    energy_cap_equals: 1200
+                    storage_cap_equals: 4186
+                    # storage_cap_min: 3140
+                    # storage_cap_max: 4186
+            tes_co:
+                constraints:
+                    energy_cap_equals: 1200
+                    storage_cap_equals: 2093
+                    # storage_cap_min: 1570
+                    # storage_cap_max: 2093
+            demand_el:
+                constraints:
+                    resource: file=demand_el.csv
+                    resource_scale: 3
+            demand_sh:
+                constraints:
+                    resource: file=demand_sh.csv
+                    resource_scale: 3
+            demand_co:
+                constraints:
+                    resource: file=demand_co.csv
+                    resource_scale: 3
+                #coordinates: {x: 1, y: 1}    
+    #commercial-end
+    

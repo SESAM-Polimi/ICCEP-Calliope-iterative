@@ -1,0 +1,11 @@
+##
+# Overrides for different example model configuratiions
+##
+
+iteration_zero:
+    model.name: Iteration 0
+    techs.hp_dhw.energy_eff: file=cop_dhw_start.csv 
+    techs.hp_clim_hot.energy_eff: file=cop_sh_start.csv 
+    techs.hp_clim_cold.energy_eff: file=cop_co_start.csv 
+
+
